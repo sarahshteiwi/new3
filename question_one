@@ -1,0 +1,95 @@
+Employee.java
+abstract class Employee {
+   private String name;
+   private String position;
+   private double basicSalary;
+   private int experience;
+   private String educationalLevel;
+ 
+   public Employee(String name, String position, double basicSalary, int experience, String educationalLevel) {
+       this.name = name;
+       this.position = position;
+       this.basicSalary = basicSalary;
+       this.experience = experience;
+       this.educationalLevel = educationalLevel;
+   }
+ 
+   public String getName() {
+       return name;
+   }
+ 
+   public String getPosition() {
+       return position;
+   }
+ 
+   public double getBasicSalary() {
+       return basicSalary;
+   }
+ 
+   public int getExperience() {
+       return experience;
+   }
+ 
+   public String getEducationalLevel() {
+       return educationalLevel;
+   }
+ 
+   public double getSalary() {
+       double salary = basicSalary + (basicSalary * 0.05 * experience);
+ 
+       if (educationalLevel.equals("Bachelor Degree"))
+           salary += 500;
+       else if (educationalLevel.equals("Diploma"))
+           salary += 250;
+ 
+       return salary;
+   }
+ 
+   public abstract double getBonus();
+}
+ 
+// FullTimeEmployee.java
+class FullTimeEmployee extends Employee {
+   public FullTimeEmployee(String name, String position, double basicSalary, int experience, String educationalLevel) {
+       super(name, position, basicSalary, experience, educationalLevel);
+   }
+ 
+   @Override
+   public double getBonus() {
+       return getBasicSalary() * 0.03;
+   }
+}
+ 
+// PartTimeEmployee.java
+class PartTimeEmployee extends Employee {
+   public PartTimeEmployee(String name, String position, double basicSalary, int experience, String educationalLevel) {
+       super(name, position, basicSalary, experience, educationalLevel);
+   }
+ 
+   @Override
+   public double getBonus() {
+       return getBasicSalary() * 0.015;
+   }
+}
+ 
+// Main.java
+public class Main {
+   public static void main(String[] args) {
+       FullTimeEmployee fullTimeEmployee = new FullTimeEmployee("Ali", "Manager", 5000, 5, "Bachelor Degree");
+       PartTimeEmployee partTimeEmployee = new PartTimeEmployee("Mohammed", "Assistant", 3000, 3, "Diploma");
+ 
+       System.out.println("Full-Time Employee Details:");
+       System.out.println("Name: " + fullTimeEmployee.getName());
+       System.out.println("Position: " + fullTimeEmployee.getPosition());
+       System.out.println("Salary: " + fullTimeEmployee.getSalary());
+       System.out.println("Bonus: " + fullTimeEmployee.getBonus());
+ 
+       System.out.println();
+ 
+       System.out.println("Part-Time Employee Details:");
+       System.out.println("Name: " + partTimeEmployee.getName());
+       System.out.println("Position: " + partTimeEmployee.getPosition());
+       System.out.println("Salary: " + partTimeEmployee.getSalary());
+       System.out.println("Bonus: " + partTimeEmployee.getBonus());
+   }
+}
